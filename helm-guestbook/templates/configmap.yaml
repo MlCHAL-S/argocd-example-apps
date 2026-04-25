@@ -1,6 +1,0 @@
-apiVersion: v1
-data:
-  message: This will be deleted
-kind: ConfigMap
-metadata:
-  name: test-config
