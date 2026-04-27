@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: read-config
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  template:
+    metadata: {}
+    spec:
+      containers:
+      - image: busybox
+        name: read-config
+        command:
+          - sh
+          - -c
+          - echo $CM; sleep 5;
+        env:
+          - name: CM
+            valueFrom:
+              configMapKeyRef:
+                name: db-config
+                key: host
+      restartPolicy: Never
